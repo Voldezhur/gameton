@@ -1,4 +1,4 @@
-async function fetchTest() {
+async function fetchUniverse() {
     const response = await fetch("https://datsedenspace.datsteam.dev/player/universe", {
         headers: {
             "X-Auth-Token": "660a858a24615660a858a24619"
@@ -8,11 +8,4 @@ async function fetchTest() {
     return (res);
 }
 
-
-async function rotateGarbage() {
-    const garbageJson = await fetchTest();
-    console.log(garbageJson);
-}
-
-
-rotateGarbage();
+fetchUniverse();
