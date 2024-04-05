@@ -1,7 +1,18 @@
 async function fetchTest() {
-    const response = await fetch("http://localhost:5000/testing");
+    const response = await fetch("https://datsedenspace.datsteam.dev/player/universe", {
+        headers: {
+            "X-Auth-Token": "660a858a24615660a858a24619"
+        }
+    });
     const res = await response.json();
-    console.log(res);
+    return (res);
 }
 
-fetchTest();
+
+async function rotateGarbage() {
+    const garbageJson = await fetchTest();
+    console.log(garbageJson);
+}
+
+
+rotateGarbage();
