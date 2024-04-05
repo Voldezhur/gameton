@@ -1,13 +1,26 @@
-const Token = "660a858a24615660a858a24619"
+import fetch from "node-fetch";
 
-async function fetchUniverse() {
-    const response = await fetch("https://datsedenspace.datsteam.dev/player/universe", {
+async function getData(url) {
+    const response = await fetch("url", {
         headers: {
             "X-Auth-Token": Token
         }
     });
     const res = await response.json();
-    console.log(res);
+    return res;
+
+}
+
+const Token = "660a858a24615660a858a24619"
+
+async function fetchUniverse() {
+    const data = await getData("https://datsedenspace.datsteam.dev/player/universe")
+    console.log(data)
+}
+
+async function fetchShip() {
+    const data = await getData("https://datsedenspace.datsteam.dev/player/universe")
+    console.log(data)
 }
 
 async function fetchShip() {
