@@ -1,4 +1,5 @@
 const Token = "660a858a24615660a858a24619"
+var fs = require('fs');
 
 async function getData(url) {
     const response = await fetch(url, {
@@ -10,9 +11,15 @@ async function getData(url) {
     return res;
 }
 
-async function fetchUniverse() {
+async function writeUniverse() {
     const data = await getData("https://datsedenspace.datsteam.dev/player/universe")
-    console.log(data)
+    const jsonData = JSON.stringify(JSON.parse(data)["universe"]);
+
+    fs.writeFile("test.txt", jsonData, function(err) {
+        if (err) {
+            console.log(err);
+        }
+    });
 }
 
 async function fetchShip() {
@@ -48,5 +55,7 @@ async function goTo() {
     console.log(flightResponse);
 }
 
-goTo();
-fetchShip();
+// goTo();
+// fetchShip();
+
+writeUniverse();

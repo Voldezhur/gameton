@@ -1,40 +1,29 @@
 import fetch from "node-fetch";
+import garbage from "./garbage.mjs";
 
-async function getData(url) {
-    const response = await fetch("url", {
-        headers: {
-            "X-Auth-Token": Token
-        }
-    });
-    const res = await response.json();
-    return res;
-
-}
-
-const Token = "660a858a24615660a858a24619"
-
-async function fetchUniverse() {
-    const data = await getData("https://datsedenspace.datsteam.dev/player/universe")
-    console.log(data)
-}
-
-async function fetchShip() {
-    const data = await getData("https://datsedenspace.datsteam.dev/player/universe")
-    console.log(data)
-}
-
-async function fetchShip() {
-    const response = await fetch("https://datsedenspace.datsteam.dev/player/universe", {
+async function getData(url, post=false, body=null) {
+    const Token = "660a858a24615660a858a24619"
+    const response = await fetch(url, {
+        method: post?'POST':'GET',
+        body,
         headers: {
             "X-Auth-Token": Token
         }
     });
     const res = await response.text();
-    console.log(JSON.parse(res)["ship"]);
+    return(JSON.parse(res));
 }
 
-async function goTo() {
-    const response = await fetch
+async function getAll() {
+    const data = await getData("https://datsedenspace.datsteam.dev/player/universe")
+    console.log(JSON.stringify(data));
 }
 
-fetchShip();
+async function travel() {
+    const data = await getData("https://datsedenspace.datsteam.dev/player/travel", true, `{"planets": ["KDEKYVTB1"]}`)
+    console.log(garbage(data))
+}
+
+//getAll();
+//travel();
+
