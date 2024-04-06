@@ -28,22 +28,28 @@ function sortGarbageForCompartment(garbageData, compartmentRows, compartmentCols
 
       if (currentFillCount < targetFillCount) {
           if (!hasDuplicateCoords(shape, flattenCompartment)) {
+              let canFillCompletely = true;
               for (const coord of shape) {
                   const [x, y] = coord;
 
                   if (x >= 0 && x < compartmentRows && y >= 0 && y < compartmentCols && compartment[x][y] === null) {
+                      coordinates.push([x, y]);
+                  } else {
+                      canFillCompletely = false;
+                      break;
+                  }
+              }
+
+              if (canFillCompletely) {
+                  for (const [x, y] of coordinates) {
                       compartment[x][y] = key;
                       currentFillCount++;
-                      coordinates.push([x, y]);
                   }
+                  filledGarbage[key] = coordinates;
               }
           }
       } else {
           break;
-      }
-
-      if (coordinates.length > 0) {
-          filledGarbage[key] = coordinates;
       }
   }
 
