@@ -137,8 +137,8 @@ async function reset() {
 }
 
 async function mainFunc () {
-    const paths = await getPlanets();
-    console.log(paths);
+    // const paths = await getPlanets();
+    // console.log(paths);
 
     // const pathToEden = await findClosestPath(paths, "Earth", "Eden");
     // console.log(pathToEden);
@@ -147,8 +147,8 @@ async function mainFunc () {
 
     // travel(paths, "Eden");
 
-    const currentPlanet = await getCurrentPlanet();
-    console.log(currentPlanet);
+    // const currentPlanet = await getCurrentPlanet();
+    // console.log(currentPlanet);
 
     // const resetInfo = await reset();
     // console.log(resetInfo);
