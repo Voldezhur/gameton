@@ -143,6 +143,9 @@ async function makeStep(paths, mainPath) {
     console.log(travelResult);
 
     stepNumber++;
+
+    const travelResult2 = await travel(paths, "Eden");
+    console.log(travelResult2);
 }
 
 async function mainFunc () {
@@ -152,19 +155,22 @@ async function mainFunc () {
     // const pathToEden = await findClosestPath(paths, "Earth", "Eden");
     // console.log(pathToEden);
 
-    // const mainPath = getGreedyTraversalOrder(paths, "Earth")[0].slice(1);
+    const mainPath = getGreedyTraversalOrder(paths, "Earth")[0].slice(1);
 
-    // console.log(mainPath);
+    console.log(mainPath);
 
-    // const travelResult = await makeStep(paths, mainPath);
+    const travelResult = await makeStep(paths, mainPath);
     // const travelResult = await travel(paths, "Earth");
-    // console.log(travelResult);
+    console.log(travelResult);
+
+    // const travelResult2 = await makeStep(paths, mainPath);
+    // console.log(travelResult2);
 
     // const currentPlanet = await getCurrentPlanet();
     // console.log(currentPlanet);
 
-    const resetInfo = await reset();
-    console.log(resetInfo);
+    // const resetInfo = await reset();
+    // console.log(resetInfo);
 }
 
 mainFunc();
