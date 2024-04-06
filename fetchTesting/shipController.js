@@ -137,6 +137,9 @@ async function reset() {
 }
 
 async function mainFunc () {
+    const universe = await getData("/player/universe");
+    console.log(universe);
+
     // const paths = await getPlanets();
     // console.log(paths);
 
