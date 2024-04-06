@@ -1,5 +1,3 @@
-const Token = "660a858a24615660a858a24619"
-
 function findClosestPath(weightedGraph, startPlanet, endPlanet) {
     const distances = {};
     const previous = {};
@@ -77,8 +75,10 @@ function getGreedyTraversalOrder(startPlanet, weightedGraph) {
 }
 
 async function getData(url, post=false, body=null) {
+    const serverUrl = "https://datsedenspace.datsteam.dev";
     const Token = "660a858a24615660a858a24619"
-    const response = await fetch(url, {
+    
+    const response = await fetch(serverUrl + url, {
         method: post?'POST':'GET',
         body,
         headers: {
@@ -92,7 +92,7 @@ async function getData(url, post=false, body=null) {
 async function getPlanets() {
     const weightedGraph = {};
 
-    const universeData = await getData("https://datsedenspace.datsteam.dev/player/universe");
+    const universeData = await getData("/player/universe");
     const planets = JSON.parse(universeData)["universe"];
 
     planets.forEach(([source, target, weight]) => {
@@ -106,7 +106,7 @@ async function getPlanets() {
 }
 
 async function getCurrentPlanet() {
-    const universeData = await getData("https://datsedenspace.datsteam.dev/player/universe");
+    const universeData = await getData("/player/universe");
     const shipData = JSON.parse(universeData)["ship"];
     return(shipData.planet.name);
 }
@@ -117,8 +117,23 @@ async function travel(paths, destination) {
 
     const path = JSON.stringify({"planets": pathToDestination})
     console.log(path);
-    const data = await getData("https://datsedenspace.datsteam.dev/player/travel", true, path)
+    const data = await getData("/player/travel", true, path)
     console.log(data);
+}
+
+async function reset() {
+    const serverUrl = "https://datsedenspace.datsteam.dev";
+    const Token = "660a858a24615660a858a24619"
+    
+    const response = await fetch(serverUrl + '/player/reset', {
+        method: "DELETE",
+        headers: {
+            "X-Auth-Token": Token
+        }
+    });
+
+    const res = await response.text();
+    return(res);
 }
 
 async function mainFunc () {
@@ -134,6 +149,9 @@ async function mainFunc () {
 
     const currentPlanet = await getCurrentPlanet();
     console.log(currentPlanet);
+
+    // const resetInfo = await reset();
+    // console.log(resetInfo);
 }
 
 mainFunc();
