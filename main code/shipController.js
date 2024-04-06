@@ -55,7 +55,7 @@ function getGreedyTraversalOrder(startPlanet, weightedGraph) {
 
         if (!visited[currentPlanet]) {
             visited[currentPlanet] = true;
-            traversalOrder.push(currentPlanet);
+            traversalOrder.push(Object.keys(currentPlanet));
 
             const neighbors = weightedGraph[currentPlanet];
 
@@ -136,22 +136,35 @@ async function reset() {
     return(res);
 }
 
+var stepNumber = 0;
+
+async function makeStep(paths, mainPath) {
+    const travelResult = await travel(paths, mainPath[stepNumber]);
+    console.log(travelResult);
+
+    stepNumber++;
+}
+
 async function mainFunc () {
-    // const paths = await getPlanets();
+    const paths = await getPlanets();
     // console.log(paths);
 
     // const pathToEden = await findClosestPath(paths, "Earth", "Eden");
     // console.log(pathToEden);
 
-    // console.log(getGreedyTraversalOrder(paths, "Earth"));
+    // const mainPath = getGreedyTraversalOrder(paths, "Earth")[0].slice(1);
 
-    // travel(paths, "Eden");
+    // console.log(mainPath);
+
+    // const travelResult = await makeStep(paths, mainPath);
+    // const travelResult = await travel(paths, "Earth");
+    // console.log(travelResult);
 
     // const currentPlanet = await getCurrentPlanet();
     // console.log(currentPlanet);
 
-    // const resetInfo = await reset();
-    // console.log(resetInfo);
+    const resetInfo = await reset();
+    console.log(resetInfo);
 }
 
 mainFunc();
